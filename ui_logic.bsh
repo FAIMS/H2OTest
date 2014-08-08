@@ -23,6 +23,7 @@ onEvent("user/usertab/login", "click", "login()");
 
 onEvent("control/myData", "show", "showMyRecords()");
 onEvent("control/myData/myRecords", "click", "loadWaterSupply()");
+onEvent("control/gps", "show", "updateGPSStatus()");
 
 onEvent("control/data/entityList", "click", "loadWaterSupply()"); //load entity after tap in the list
 onEvent("control/data/newEntity", "click", "newWaterSupply()");
@@ -40,6 +41,16 @@ showMyRecords() {
         "GROUP BY uuid  "+
         "order by aenttimestamp desc, response; "));
 
+}
+
+updateGPSStatus(){
+    position = getGPSPosition();
+    if (position == null) {
+        setFieldValue("control/gps/GPSIndicator", "No GPS Signal");
+        return;
+    }
+    String gpsStatus = "Current GPS Estimated Accuracy: "+ getGPSEstimatedAccuracy();
+    setFieldValue("control/gps/GPSIndicator", gpsStatus);
 }
 
 /*** WATER SUPPLY ***/
@@ -100,6 +111,10 @@ reallyDeleteWaterSupply() {
     cancelTabGroup("WaterSupply", false);
 }
 
+doNotDelete(){
+    return;
+}
+
 checkMandatoryAttributes() {
     String msg = "";
     value = getFieldValue("WaterSupply/WaterSupply_General_Information/ProblemDescription");
@@ -127,7 +142,6 @@ checkMandatoryAttributes() {
 }
 
 loadWaterSupplyAttributes() {
-    showToast("load attributes");
     populateRadioGroup("WaterSupply/WaterSupply_General_Information/ProblemFrequency", makeVocab("Problem Frequency"));
     populateRadioGroup("WaterSupply/WaterSupply_General_Information/ProblemDuration", makeVocab("Problem Duration"));
     populateRadioGroup("WaterSupply/WaterSupply_General_Information/ProblemOnset", makeVocab("Problem Onset"));
@@ -213,7 +227,6 @@ onEvent("control/gps/SyncOff", "click", "setSyncEnabled(false);setFileSyncEnable
 
     
 /*** INTERNAL GPS ***/
-startInternalGPS();
 onEvent("control/gps/connectInternal", "click", "startInternalGPS();");
 onEvent("control/gps/connectExternal", "click", "startExternalGPS();");
 

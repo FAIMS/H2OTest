@@ -40,6 +40,7 @@
             <gps>
               <connectInternal/>
               <connectExternal/>
+              <GPSIndicator/>
               <SyncOn/>
               <SyncOff/>
             </gps>
@@ -124,26 +125,26 @@
           </item>
         </select1>
         <trigger ref="login">
-          <label>Login</label>
+          <label>{Login}</label>
         </trigger>
       </group>
     </group>
     <group ref="control">
       <label/>
       <group ref="data" faims_scrollable="false">
-        <label>All Entities</label>
+        <label>{Reports}</label>
         <select1 ref="entityTypeList">
-          <label>Select Entity Type:</label>
+          <label>{Select_Entity_Type}</label>
           <item>
             <label>{Water_Supply}</label>
             <value>WaterSupply</value>
           </item>
         </select1>
         <trigger ref="newEntity">
-          <label>Create New Entity</label>
+          <label>{Create_New_Entity}</label>
         </trigger>
         <select1 appearance="compact" faims_annotation="false" faims_certainty="false" ref="entityList">
-          <label>Tap entity in list below to load it</label>
+          <label>{Tap_to_load}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
@@ -151,9 +152,9 @@
         </select1>
       </group>
       <group ref="myData" faims_scrollable="false">
-        <label>My Data</label>
+        <label>{My_Data}</label>
           <select1 appearance="compact" faims_annotation="false" faims_certainty="false" ref="myRecords">
-            <label>My Reports:</label>
+            <label>{My_Reports}</label>
             <item>
               <label>placeholder</label>
               <value>placeholder</value>
@@ -161,18 +162,21 @@
           </select1>
       </group>
       <group ref="gps">
-        <label>Control</label>
+        <label>{Control}</label>
         <trigger ref="connectInternal">
-          <label>Connect To Internal GPS</label>
+          <label>{Connect_To_Internal_GPS}</label>
         </trigger>
         <trigger ref="connectExternal">
-          <label>Connect To External GPS</label>
+          <label>{Connect_To_External_GPS}</label>
         </trigger>
+        <input ref="GPSIndicator" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="true">
+          <label>{GPS_Indicator}</label>
+        </input>
         <trigger ref="SyncOn">
-          <label>Sync On</label>
+          <label>{Sync_On}</label>
         </trigger>
         <trigger ref="SyncOff">
-          <label>Sync Off</label>
+          <label>{Sync_Off}</label>
         </trigger>
       </group>
     </group>
@@ -180,7 +184,7 @@
     <group ref="WaterSupply" faims_archent_type="Water Supply">
       <label>{Water_Supply}</label>
       <group ref="WaterSupply_General_Information">
-        <label>Gen</label>
+        <label>{Water_Supply_Report}</label>
         <input ref="WaterSupplyID" faims_attribute_name="Water Supply ID" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>{Water_Supply_ID}</label>
         </input>
@@ -203,19 +207,19 @@
           </group>
         </group>
         <trigger ref="takeGPS">
-          <label>Take GPS</label>
+          <label>{Take_GPS}</label>
         </trigger>
         <input ref="AddressOfReportedProblemoptional" faims_attribute_name="Address of reported problem (optional)" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Address_of_reported_problem_(optional)}</label>
         </input>
         <input ref="Contact" faims_attribute_name="Contact Details" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
-          <label>Contact Details</label>
+          <label>{Contact_Details}</label>
         </input>
         <input ref="ProblemDescription" faims_attribute_name="Problem Description" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Problem_Description}</label>
         </input>
         <!--We would like to see Radiogroup-->
-        <select1 ref="ProblemFrequency" faims_attribute_name="Problem Frequency" faims_certainty="false" faims_annotation="false" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="ProblemFrequency" faims_attribute_name="Problem Frequency" faims_certainty="true" faims_annotation="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Problem_Frequency}</label>
           <item>
             <label>placeholder</label>
@@ -223,7 +227,7 @@
           </item>
         </select1>
         <!--We would like to see Radiogroup-->
-        <select1 ref="ProblemDuration" faims_attribute_name="Problem Duration" faims_certainty="false" faims_annotation="false" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="ProblemDuration" faims_attribute_name="Problem Duration" faims_certainty="true" faims_annotation="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Problem_Duration}</label>
           <item>
             <label>placeholder</label>
@@ -231,7 +235,7 @@
           </item>
         </select1>
         <!--We would like to see Radiogroup-->
-        <select1 ref="ProblemOnset" faims_attribute_name="Problem Onset" faims_certainty="false" faims_annotation="false" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="ProblemOnset" faims_attribute_name="Problem Onset" faims_certainty="true" faims_annotation="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Problem_Onset}</label>
           <item>
             <label>placeholder</label>
@@ -239,7 +243,7 @@
           </item>
         </select1>
         <!--We would like to see Dropdown-->
-        <select1 ref="ProblemHistory" faims_attribute_name="Problem History" faims_certainty="false" faims_annotation="false" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="ProblemHistory" faims_attribute_name="Problem History" faims_certainty="true" faims_annotation="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Problem_History}</label>
           <item>
             <label>placeholder</label>
@@ -247,7 +251,7 @@
           </item>
         </select1>
         <!--We would like to see Dropdown-->
-        <select1 ref="TypeOfStructure" faims_attribute_name="Type of Structure" faims_certainty="false" faims_annotation="false" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="TypeOfStructure" faims_attribute_name="Type of Structure" faims_certainty="true" faims_annotation="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Type_of_Structure}</label>
           <item>
             <label>placeholder</label>
