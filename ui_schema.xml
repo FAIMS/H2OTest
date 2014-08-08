@@ -34,23 +34,33 @@
               <newEntity/>
               <entityList/>
             </data>
+            <myData>
+              <myRecords/>
+            </myData>
             <gps>
-              <connectinternal/>
+              <connectInternal/>
+              <connectExternal/>
+              <SyncOn/>
+              <SyncOff/>
             </gps>
           </control>
-          <!--select entity for given entity type-->
-          <selectEntity>
-            <data>
-              <newEntity/>
-              <entityList/>
-            </data>
-          </selectEntity>
           <!--list of tabgroups for ArchEntTypes)-->
           <!--ArchEntType: WATER SUPPLY-->
           <WaterSupply>
             <WaterSupply_General_Information>
-              <AddressOfReportedProblemoptional/>
+              <WaterSupplyID/>
               <Timestamp/>
+              <container1>
+                <child1>
+                  <Latitude/>
+                </child1>
+                <child2>
+                  <Longitude/>
+                </child2>
+              </container1>
+              <takeGPS/>
+              <AddressOfReportedProblemoptional/>
+              <Contact/>
               <ProblemDescription/>
               <ProblemFrequency/>
               <ProblemDuration/>
@@ -63,9 +73,11 @@
               <UpdateAndClose/>
               <Delete/>
             </WaterSupply_General_Information>
-            <WaterSupply_uids>
-              <FAIMS_UID/>
-            </WaterSupply_uids>
+            <hidden>
+              <Northing/>
+              <Easting/>
+              <Z/>
+            </hidden>
           </WaterSupply>
         </faims>
       </instance>
@@ -73,6 +85,8 @@
       <bind nodeset="/faims/WaterSupply/WaterSupply_General_Information/AddressOfReportedProblemoptional" type="string"/>
       <bind nodeset="/faims/WaterSupply/WaterSupply_General_Information/ProblemDescription" type="string"/>
       <bind nodeset="/faims/WaterSupply/WaterSupply_General_Information/FloorWhereProblemNoted" type="decimal"/>
+      <bind nodeset="/faims/WaterSupply/WaterSupply_General_Information/container1/child1/Latitude" type="decimal"/>
+      <bind nodeset="/faims/WaterSupply/WaterSupply_General_Information/container1/child2/Longitude" type="decimal"/>
     </model>
   </h:head>
   <h:body>
@@ -136,27 +150,30 @@
           </item>
         </select1>
       </group>
+      <group ref="myData" faims_scrollable="false">
+        <label>My Data</label>
+          <select1 appearance="compact" faims_annotation="false" faims_certainty="false" ref="myRecords">
+            <label>My Reports:</label>
+            <item>
+              <label>placeholder</label>
+              <value>placeholder</value>
+            </item>
+          </select1>
+      </group>
       <group ref="gps">
         <label>Control</label>
-        <trigger ref="connectinternal">
+        <trigger ref="connectInternal">
           <label>Connect To Internal GPS</label>
         </trigger>
-      </group>
-    </group>
-    <group ref="selectEntity">
-      <label/>
-      <group ref="data" faims_scrollable="false">
-        <label>Select entity or create new one</label>
-        <trigger ref="newEntity">
-          <label>Create New Entity</label>
+        <trigger ref="connectExternal">
+          <label>Connect To External GPS</label>
         </trigger>
-        <select1 appearance="compact" faims_annotation="false" faims_certainty="false" ref="entityList">
-          <label>Tap entity in list below to select it</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
+        <trigger ref="SyncOn">
+          <label>Sync On</label>
+        </trigger>
+        <trigger ref="SyncOff">
+          <label>Sync Off</label>
+        </trigger>
       </group>
     </group>
     <!--WATERSUPPLY-->
@@ -164,11 +181,35 @@
       <label>{Water_Supply}</label>
       <group ref="WaterSupply_General_Information">
         <label>Gen</label>
+        <input ref="WaterSupplyID" faims_attribute_name="Water Supply ID" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Water_Supply_ID}</label>
+        </input>
+        <input ref="Timestamp" faims_attribute_name="Timestamp" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="true">
+          <label>{Timestamp}</label>
+        </input>
+        <group faims_style="orientation" ref="container1">
+          <label/>
+          <group faims_style="even" ref="child1">
+            <label/>
+            <input faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false" ref="Latitude">
+              <label>{Latitude}</label>
+            </input>
+          </group>
+          <group faims_style="even" ref="child2">
+            <label/>
+            <input faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false" ref="Longitude">
+              <label>{Longitude}</label>
+            </input>
+          </group>
+        </group>
+        <trigger ref="takeGPS">
+          <label>Take GPS</label>
+        </trigger>
         <input ref="AddressOfReportedProblemoptional" faims_attribute_name="Address of reported problem (optional)" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Address_of_reported_problem_(optional)}</label>
         </input>
-        <input ref="Timestamp" faims_attribute_name="Timestamp" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
-          <label>{Timestamp}</label>
+        <input ref="Contact" faims_attribute_name="Contact Details" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
+          <label>Contact Details</label>
         </input>
         <input ref="ProblemDescription" faims_attribute_name="Problem Description" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Problem_Description}</label>
@@ -229,10 +270,16 @@
           <label>{Delete_Entity}</label>
         </trigger>
       </group>
-      <group ref="WaterSupply_uids" faims_hidden="true">
-        <label>UIDs</label>
-        <input ref="FAIMS_UID" faims_attribute_type="freetext" faims_certainty="false" faims_read_only="true">
-          <label>UID</label>
+      <group ref="hidden" faims_hidden="true">
+        <label>hidden</label>
+        <input faims_attribute_name="Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false" ref="Northing">
+          <label>{Northing}</label>
+        </input>
+        <input faims_attribute_name="Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false" ref="Easting">
+          <label>{Easting}</label>
+        </input>
+        <input faims_attribute_name="Z" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false" ref="Z">
+          <label>{Z}</label>
         </input>
       </group>
     </group>

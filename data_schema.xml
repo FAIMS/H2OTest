@@ -8,11 +8,32 @@
   <!--WATER SUPPLY-->
   <ArchaeologicalElement name="Water Supply">
     <description>Water supply monitoring simple form</description>
-    <property name="Address of reported problem (optional)" type="blocktext">
-      <description>An extended description, use this where text will be limited and does not require any formatting, otherwise use the WYSIWYG text tab to enter formatted text</description>
+    <property name="Water Supply ID" type="freetext" isIdentifier="true">
+      <description>ID</description>
     </property>
     <property name="Timestamp" type="date">
       <description>timestamp</description>
+    </property>
+    <property name="Latitude" type="freetext">
+      <description>Latitude</description>
+    </property>
+    <property name="Longitude" type="freetext">
+      <description>Longitude</description>
+    </property>
+    <property name="Northing" type="freetext">
+      <description>Northing</description>
+    </property>
+    <property name="Easting" type="freetext">
+      <description>Easting</description>
+    </property>
+    <property name="Z" type="freetext">
+      <description>Z</description>
+    </property>
+    <property name="Address of reported problem (optional)" type="blocktext">
+      <description>An extended description, use this where text will be limited and does not require any formatting, otherwise use the WYSIWYG text tab to enter formatted text</description>
+    </property>
+    <property name="Contact Details" type="freetext">
+      <description>Please enter the phone number or email of the reportee.</description>
     </property>
     <property name="Problem Description" type="blocktext">
       <description>Short summary, typically used in annotated listings, information popups and so forth. Aim for 100 - 200 words.</description>
