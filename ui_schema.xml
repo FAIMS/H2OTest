@@ -209,13 +209,13 @@
         <trigger ref="takeGPS">
           <label>{Take_GPS}</label>
         </trigger>
-        <input ref="AddressOfReportedProblemoptional" faims_attribute_name="Address of reported problem (optional)" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="AddressOfReportedProblemoptional" faims_attribute_name="Address of reported problem (optional)" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Address_of_reported_problem_(optional)}</label>
         </input>
-        <input ref="Contact" faims_attribute_name="Contact Details" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Contact" faims_attribute_name="Contact Details" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Contact_Details}</label>
         </input>
-        <input ref="ProblemDescription" faims_attribute_name="Problem Description" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="ProblemDescription" faims_attribute_name="Problem Description" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Problem_Description}</label>
         </input>
         <!--We would like to see Radiogroup-->
@@ -258,7 +258,7 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="FloorWhereProblemNoted" faims_attribute_name="Floor where problem noted" faims_certainty="false" faims_attribute_type="measure" faims_read_only="false">
+        <input ref="FloorWhereProblemNoted" faims_attribute_name="Floor where problem noted" faims_certainty="true" faims_annotation="true" faims_attribute_type="measure" faims_read_only="false">
           <label>{Floor_where_problem_noted}</label>
         </input>
         <input ref="gap" faims_attribute_type="freetext" faims_certainty="false" faims_read_only="true">
